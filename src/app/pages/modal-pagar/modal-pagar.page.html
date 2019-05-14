@@ -1,0 +1,33 @@
+
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>Pagar ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-item class="ion-text-center">
+    <h3>Ticket: {{pagamento.codigo}}</h3>
+  </ion-item>
+
+  <br/>
+  <ion-item class="ion-text-center">
+    <h5>Entrada: {{pagamento.entrada.hours | number:"2.0"}}:{{pagamento.entrada.minutes | number:"2.0"}}</h5>
+    &nbsp; &nbsp;
+    <h5>Saída: {{pagamento.saida.hours | number:"2.0"}}:{{pagamento.saida.minutes | number:"2.0"}}</h5>
+  </ion-item>
+
+  <ion-item class="ion-text-center">
+    <h5>Total a pagar: R${{valor | number:".2"}}</h5>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-button (click)="dismiss()" class="center">Voltar</ion-button>
+      <ion-button (click)="armazenar()" class="center">Concluir</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
