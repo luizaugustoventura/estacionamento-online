@@ -65,6 +65,7 @@ export class ServicosService {
   calcularPreco(entrada: string, saida: string): number {
     let e: Time = { hours: parseInt( entrada.split(':')[0] ) , minutes: parseInt( entrada.split(':')[1] ) };
     let s: Time = { hours: parseInt( saida.split(':')[0] ) , minutes: parseInt( saida.split(':')[1] ) };
+
     if ((e.hours > s.hours) || ((e.hours == s.hours) && (e.minutes == s.minutes)))
       return 0;
 
