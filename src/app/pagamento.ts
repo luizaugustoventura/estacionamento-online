@@ -1,5 +1,3 @@
-import { Time, DatePipe } from '@angular/common';
-
 export class Pagamento {
     codigo: number;
     entrada: string;

@@ -28,14 +28,16 @@ export class ModalPagarPage implements OnInit {
       this.mensagem = "Pagamento efetuado com sucesso!";
     */
 
-    this.servicos.setPagamento(this.pagamento)
+    this.servicos.setPagamento(this.pagamento) 
       .then(
         () => {
-          this.mensagem = "Pagamento efetuado com sucesso!";
-        }
-      ), this.mensagem = "Erro ao efetuar pagamento!";
-    
-    this.dismiss();
+          this.mensagem = 'Pagamento efetuado com sucesso!';
+          this.dismiss();
+        }), 
+      () => {
+        this.mensagem = 'Erro ao efetuar pagamento!';
+        this.dismiss();
+      }
   }
 
   dismiss() {
