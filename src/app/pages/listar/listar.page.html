@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Lista de pagamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item *ngFor="let pagamento of (pagamentos | async)">
+
+    <ion-card class="center" color="light">
+      <ion-card-header>
+        <ion-card-title>{{pagamento.codigo}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-text position="left">
+          <b>Entrada: </b>{{pagamento.entrada}}   
+        </ion-text>
+        
+        <ion-text position="right">
+          <b>Saída: </b>{{pagamento.saida}} 
+        </ion-text>
+        <br>
+        <ion-text>
+          <b>Total: </b>R${{calculaTotal(pagamento.entrada, pagamento.saida) | number:'.2'}}
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  
+  </ion-item>
+</ion-content>
