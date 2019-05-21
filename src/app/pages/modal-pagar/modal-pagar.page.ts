@@ -12,10 +12,18 @@ export class ModalPagarPage implements OnInit {
 
   @Input() pagamento: Pagamento;
   @Input() valor: number;
-  mensagem: string = "";
+  mensagem: string = 'Pagamento cancelado';
+  pagamentos;
+  p: Pagamento = {
+    codigo: 0,
+    entrada: '',
+    saida: ''
+  };
 
   constructor(private modalController: ModalController,
-              private servicos: ServicosService) { }
+              private servicos: ServicosService) { 
+    this.pagamentos = this.servicos.getListaPagamentos();            
+  }
 
   ngOnInit() {
   }
@@ -27,6 +35,33 @@ export class ModalPagarPage implements OnInit {
     else
       this.mensagem = "Pagamento efetuado com sucesso!";
     */
+    /*
+    this.servicos.getPagamento(this.pagamento.codigo)
+      .subscribe( data => {
+        this.p = data;
+        console.log("Código pagamento: " + this.p.codigo);
+        console.log("Código entrada: " + this.p.entrada);
+        console.log("Código saida: " + this.p.saida);
+      } );
+    */
+
+    /*
+    const P: Pagamento = this.servicos.busca(this.pagamento.codigo);
+    console.log("Código: " + P.codigo + " // Entrada: " + P.entrada + " // Saída: " + P.saida);*/
+    /* 
+    if(P.codigo == this.pagamento.codigo)
+    {
+      this.mensagem = "Este ticket já está pago!";
+      this.dismiss();
+      return;
+    }
+    */
+    if(this.valor <=0)
+    {
+      this.mensagem = "Horários de entrada e saída inválidos!";
+      this.dismiss();
+      return;
+    }
 
     this.servicos.setPagamento(this.pagamento) 
       .then(
