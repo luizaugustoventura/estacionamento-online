@@ -4,7 +4,8 @@ import { Time } from '@angular/common';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { map, take} from 'rxjs/operators';
+import { map, take, find} from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -29,8 +30,32 @@ export class ServicosService {
       );
   }
 
+  busca(codigo: number): Pagamento {
+    
+    this.pagamentos.forEach( pagamentos => {
+      pagamentos.forEach( p => {
+        if (p.codigo == codigo)
+          console.log("Código: " + p.codigo + " // Entrada: " + p.entrada + " // Saída: " + p.saida);
+          return p;
+      });
+    });
+    return new Pagamento(0, '', '');
+  }
+
   getListaPagamentos(): Observable<Pagamento[]> {
     return this.pagamentos;
+  }
+
+  getPagamento(codigo: number): Observable<Pagamento> {
+    return this.pagamentosCollection.doc<Pagamento>(codigo.toString()).valueChanges().
+      pipe(
+        take(1),
+        map( pagamento => {
+          console.log("Teste: " + pagamento);
+          pagamento.codigo = codigo;
+          return pagamento;
+        })
+      );
   }
 
   setPagamento(pagamento: Pagamento): Promise<DocumentReference> {
