@@ -13,19 +13,16 @@ export class ModalPagarPage implements OnInit {
   @Input() pagamento: Pagamento;
   @Input() valor: number;
   mensagem: string = 'Pagamento cancelado';
-  pagamentos;
-  p: Pagamento = {
-    codigo: 0,
-    entrada: '',
-    saida: ''
-  };
+
+  p: Pagamento = new Pagamento(0, '', '');
+  P: boolean = false;
 
   constructor(private modalController: ModalController,
-              private servicos: ServicosService) { 
-    this.pagamentos = this.servicos.getListaPagamentos();            
+              private servicos: ServicosService) { //this.p = this.servicos.busca(this.pagamento.codigo); 
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.p = this.servicos.busca(this.pagamento.codigo);
   }
 
   armazenar() {
@@ -35,6 +32,7 @@ export class ModalPagarPage implements OnInit {
     else
       this.mensagem = "Pagamento efetuado com sucesso!";
     */
+    
     /*
     this.servicos.getPagamento(this.pagamento.codigo)
       .subscribe( data => {
@@ -45,17 +43,17 @@ export class ModalPagarPage implements OnInit {
       } );
     */
 
-    /*
-    const P: Pagamento = this.servicos.busca(this.pagamento.codigo);
-    console.log("Código: " + P.codigo + " // Entrada: " + P.entrada + " // Saída: " + P.saida);*/
-    /* 
-    if(P.codigo == this.pagamento.codigo)
+    console.log(this.servicos.busca(this.pagamento.codigo));
+    console.log("Objeto consultado: " + this.p.codigo);
+    
+    if(this.p.codigo == this.pagamento.codigo) 
     {
-      this.mensagem = "Este ticket já está pago!";
+      console.log("Pagamento barrado!");
+      this.mensagem = "Este ticket já foi pago!";
       this.dismiss();
       return;
     }
-    */
+    
     if(this.valor <=0)
     {
       this.mensagem = "Horários de entrada e saída inválidos!";
