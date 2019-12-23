@@ -1,9 +1,19 @@
+import { Connection } from '../../connection';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: Connection.apiKey,
+    authDomain: Connection.authDomain,
+    databaseURL: Connection.databaseURL,
+    projectId: Connection.projectId,
+    storageBucket: Connection.storageBucket,
+    messagingSenderId: Connection.messagingSenderId,
+    appId: Connection.appId
+  }
 };
 
 /*
